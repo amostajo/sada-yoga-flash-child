@@ -1,0 +1,17 @@
+# Dependencies:
+/vendor
+/node_modules
+/bower_components
+
+# Compiled assets:
+/assets/css
+/assets/js
+
+# Generated tmp:
+/builds
+/svn
+composer.lock
+.DS_Store
+
+# Env files
+wordpress-org.json
