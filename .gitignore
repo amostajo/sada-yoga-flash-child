@@ -6,6 +6,7 @@
 # Compiled assets:
 /assets/css
 /assets/js
+/assets/raw/css
 
 # Generated tmp:
 /builds

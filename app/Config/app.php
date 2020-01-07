@@ -24,9 +24,15 @@ return [
     'autoenqueue' => [
 
         // Enables or disables auto-enqueue of assets
-        'enabled'       => false,
+        'enabled'       => true,
         // Assets to auto-enqueue
-        'assets'        => [],
+        'assets'        => [
+                            [
+                                'asset'     => 'css/app.css',
+                                'dep'       => [],
+                                'footer'    => false,
+                            ],
+                        ],
 
     ],
 
