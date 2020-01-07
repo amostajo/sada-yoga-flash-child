@@ -61,7 +61,7 @@ class CustomizerController extends Controller
      * Renders customizer settings.
      * @since 1.0.0
      * 
-     * @hook customize_register
+     * @hook wp_head
      */
     public function render()
     {

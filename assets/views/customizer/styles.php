@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Customizer rendering.
  *
@@ -10,10 +9,14 @@
  */?><style type="text/css">
 /* CUSTOMIZER */
 <?php foreach ( $settings as $id => $css ) : ?>
+    <?php $value = get_theme_mod( $id, array_key_exists( 'default', $css ) ? $css['default'] : '' ) ?>
+    <?php if ( $value === false ) : ?>
+        <?php continue; ?>
+    <?php endif ?>
     <?php foreach ( $css['selectors'] as $selector => $styles ) : ?>
         <?= esc_attr( $selector ) ?> {
             <?php foreach ( $styles as $style ) : ?>
-                <?php printf( $style, get_theme_mod( $id, array_key_exists( 'default', $css ) ? $css['default'] : '' ) ) ?>
+                <?php printf( $style, $value ) ?>
             <?php endforeach ?>
         }
     <?php endforeach ?>
