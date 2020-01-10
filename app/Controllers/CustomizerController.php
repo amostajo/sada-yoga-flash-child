@@ -25,10 +25,9 @@ class CustomizerController extends Controller
     public function register( $wp_customize )
     {
         // Load configuration
-        $customizer_data = include sada_yoga()->config->get( 'paths.base' ) . 'Config/customizer.php';
-        if ( ! isset( $customizer_data ) || empty( $customizer_data ) )
+        $config = $this->get_config();
+        if ( empty( $config ) )
             return;
-        $config = new Config( $customizer_data );
         // Register configuration
         // -- Sections
         foreach ( $config->get( 'sections' ) as $id => $options ) {
@@ -66,13 +65,50 @@ class CustomizerController extends Controller
     public function render()
     {
         // Load configuration
-        $customizer_data = include sada_yoga()->config->get( 'paths.base' ) . 'Config/customizer.php';
-        if ( ! isset( $customizer_data ) || empty( $customizer_data ) )
+        $config = $this->get_config();
+        if ( empty( $config ) )
             return;
-        $config = new Config( $customizer_data );
         // Render settings
         $settings = $config->get( 'rendering' );
         if ( ! empty( $settings ) )
             $this->view->show( 'customizer.styles', ['settings' => $settings ] );
+    }
+    /**
+     * Returns configuration.
+     * @since 1.0.0
+     * 
+     * @return \WPMVC\Config
+     */
+    public function get_config()
+    {
+        $customizer_data = include sada_yoga()->config->get( 'paths.base' ) . 'Config/customizer.php';
+        return ! isset( $customizer_data ) || empty( $customizer_data )
+            ? null
+            : new Config( $customizer_data );
+    }
+    /**
+     * Prints a style line related to a customizer setting.
+     * @since 1.0.0
+     * 
+     * @param string $setting_id
+     * @param string $style
+     * @param mixed  $value
+     */
+    public function print_style( $setting_id, $style, $value )
+    {
+        // Load configuration
+        $config = $this->get_config();
+        if ( empty( $config ) )
+            return;
+        // Check if setting is media
+        if ( $config->get( 'controls.' . $setting_id . '.type' ) === 'media' ) {
+            $value = wp_get_attachment_image_src( $value );
+            if ( is_wp_error( $value ) )
+                return;
+            if ( is_array( $value ) )
+                $value = $value[0];
+        }
+        // Print
+        printf( $style, $value );
     }
 }

@@ -15,9 +15,14 @@ return [
 
     // Customizer sections
     'sections' => [
+        'nav' => [
+            'title'             => __( 'Nav', 'sada-yoga' ),
+            'priority'          => 104, // After menu
+            'capability'        => 'edit_theme_options',
+        ],
         'footer' => [
             'title'             => __( 'Footer', 'sada-yoga' ),
-            'priority'          => 101, // After menu
+            'priority'          => 105, // After menu
             'capability'        => 'edit_theme_options',
         ],
     ],
@@ -59,6 +64,38 @@ return [
         'copyright_text_color' => [
             'default'           => '#FFFFFF',
             'sanitize_callback' => 'sanitize_hex_color',
+        ],
+        'nav_icon_before' => [
+            'default'           => 0,
+            'sanitize_callback' => 'absint',
+        ],
+        'nav_icon_after' => [
+            'default'           => 0,
+            'sanitize_callback' => 'absint',
+        ],
+        'nav_icon_width' => [
+            'default'           => '',
+            'sanitize_callback' => 'absint',
+        ],
+        'nav_icon_height' => [
+            'default'           => '',
+            'sanitize_callback' => 'absint',
+        ],
+        'nav_icon_top_offset' => [
+            'default'           => 0,
+            'sanitize_callback' => 'sanitize_text_field',
+        ],
+        'nav_icon_side_offset' => [
+            'default'           => 0,
+            'sanitize_callback' => 'sanitize_text_field',
+        ],
+        'nav_icon_opacity' => [
+            'default'           => 100,
+            'sanitize_callback' => 'int_to_percentage',
+        ],
+        'nav_icon_breakpoint' => [
+            'default'           => '',
+            'sanitize_callback' => 'sanitize_text_field',
         ],
     ],
 
@@ -120,6 +157,65 @@ return [
             'priority'          => 2,
             'section'           => 'footer',
             'label'             => __( 'Text color', 'sada-yoga' ),
+        ],
+        'nav_icon_before' => [
+            'type'              => 'media',
+            'priority'          => 1,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon [Left]', 'sada-yoga' ),
+            'desc'              => __( 'This is the icon that will float at the <b>left</b> of the main nav.', 'sada-yoga' ),
+            'mime_type'         => 'image',
+        ],
+        'nav_icon_after' => [
+            'type'              => 'media',
+            'priority'          => 2,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon [Right]', 'sada-yoga' ),
+            'desc'              => __( 'This is the icon that will float at the <b>right</b> of the main nav.', 'sada-yoga' ),
+            'mime_type'         => 'image',
+        ],
+        'nav_icon_width' => [
+            'type'              => 'number',
+            'priority'          => 10,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon width', 'sada-yoga' ),
+        ],
+        'nav_icon_height' => [
+            'type'              => 'number',
+            'priority'          => 11,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon height', 'sada-yoga' ),
+        ],
+        'nav_icon_top_offset' => [
+            'type'              => 'number',
+            'priority'          => 12,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon top offset', 'sada-yoga' ),
+            'description'       => __( 'Top offset margin to use to position floaty in the middle of the nav.', 'sada-yoga' ),
+        ],
+        'nav_icon_side_offset' => [
+            'type'              => 'number',
+            'priority'          => 13,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon side offset', 'sada-yoga' ),
+            'description'       => __( 'Side (left or right) offset margin to use to position floaty.', 'sada-yoga' ),
+        ],
+        'nav_icon_opacity' => [
+            'type'              => 'range',
+            'priority'          => 15,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon opacity', 'sada-yoga' ),
+            'input_attrs'       => [
+                                    'min' => 0,
+                                    'max' => 100,
+            ],
+        ],
+        'nav_icon_breakpoint' => [
+            'type'              => 'number',
+            'priority'          => 19,
+            'section'           => 'nav',
+            'label'             => __( 'Floaty icon hide breakpoint', 'sada-yoga' ),
+            'description'       => __( 'Resolution breakpoint in which icons will disappear.', 'sada-yoga' ),
         ],
     ],
 
@@ -188,6 +284,101 @@ return [
                 '.logo .logo-image img' => [
                     'max-height: %spx !important;',
                     'height: auto !important;',
+                ],
+            ],
+        ],
+        'nav_icon_before' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'content: " ";',
+                    'background-image: url(%s);',
+                    'background-size: contain;',
+                    'position: absolute;',
+                    'display: block;',
+                    'top: 0;',
+                    'left: 0;',
+                ],
+            ],
+        ],
+        'nav_icon_after' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::after' => [
+                    'content: " ";',
+                    'background-image: url(%s);',
+                    'background-size: contain;',
+                    'position: absolute;',
+                    'display: block;',
+                    'top: 0;',
+                    'right: 0;',
+                ],
+            ],
+        ],
+        'nav_icon_width' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'width: %spx',
+                ],
+                '.header-bottom::after' => [
+                    'width: %spx',
+                ],
+            ],
+        ],
+        'nav_icon_height' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'height: %spx',
+                ],
+                '.header-bottom::after' => [
+                    'height: %spx',
+                ],
+            ],
+        ],
+        'nav_icon_top_offset' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'top: %spx !important',
+                ],
+                '.header-bottom::after' => [
+                    'top: %spx !important',
+                ],
+            ],
+        ],
+        'nav_icon_side_offset' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'left: %spx !important',
+                ],
+                '.header-bottom::after' => [
+                    'right: %spx !important',
+                ],
+            ],
+        ],
+        'nav_icon_opacity' => [
+            'default'   => false,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'opacity: %s',
+                ],
+                '.header-bottom::after' => [
+                    'opacity: %s',
+                ],
+            ],
+        ],
+        'nav_icon_breakpoint' => [
+            'default'   => false,
+            'breakpoint' => true,
+            'selectors' => [
+                '.header-bottom::before' => [
+                    'display: none;',
+                ],
+                '.header-bottom::after' => [
+                    'display: none;',
                 ],
             ],
         ],

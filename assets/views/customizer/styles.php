@@ -13,12 +13,18 @@
     <?php if ( $value === false ) : ?>
         <?php continue; ?>
     <?php endif ?>
+    <?php if ( array_key_exists( 'breakpoint', $css ) && $css['breakpoint'] ) : ?>
+    @media screen and ( max-width: <?= $value ?>px ) {
+    <?php endif ?>
     <?php foreach ( $css['selectors'] as $selector => $styles ) : ?>
         <?= esc_attr( $selector ) ?> {
             <?php foreach ( $styles as $style ) : ?>
-                <?php printf( $style, $value ) ?>
+                <?php print_customizer_setting_style( $id, $style, $value ) ?>
             <?php endforeach ?>
         }
     <?php endforeach ?>
+    <?php if ( array_key_exists( 'breakpoint', $css ) && $css['breakpoint'] ) : ?>
+    }
+    <?php endif ?>
 <?php endforeach ?>
 </style>
