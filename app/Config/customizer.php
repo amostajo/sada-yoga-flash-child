@@ -10,9 +10,6 @@
  */
 return [
 
-    // Customizer panels
-    'panels' => [],
-
     // Customizer sections
     'sections' => [
         'nav' => [

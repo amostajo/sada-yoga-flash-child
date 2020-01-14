@@ -67,7 +67,7 @@ return [
         // Default path for language files
         'path'          => __DIR__ . '/../../assets/lang/',
         // Text domain
-        'textdomain'    => 'text-domain',
+        'textdomain'    => 'flash-child',
         // Unload loaded locale files before localization
         'unload'        => false,
         // Flag that inidcates if this is a Wordpress.org plugin/theme
@@ -75,6 +75,8 @@ return [
 
     ],
 
-    'addons' => [],
+    'addons' => [
+        'WPMVC\Addons\Customizer\CustomizerAddon',
+    ],
 
 ];
