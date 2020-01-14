@@ -65,9 +65,11 @@ class ConfigController extends Controller
      */
     public function asset_url_or_path($url_or_path)
     {
-        $lang = pll_current_language('slug');
-        if (strpos($url_or_path, '/' . $lang . '/') !== false) {
-            $url_or_path = str_replace('/' . $lang, '', $url_or_path);
+        if (function_exists('pll_current_language')) {
+            $lang = pll_current_language('slug');
+            if (strpos($url_or_path, '/' . $lang . '/') !== false) {
+                $url_or_path = str_replace('/' . $lang, '', $url_or_path);
+            }
         }
         return $url_or_path;
     }
