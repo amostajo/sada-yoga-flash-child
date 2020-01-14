@@ -67,7 +67,7 @@ class ConfigController extends Controller
     {
         if (function_exists('pll_current_language')) {
             $lang = pll_current_language('slug');
-            if (strpos($url_or_path, '/' . $lang . '/') !== false) {
+            if (strpos($url_or_path, '/' . $lang) !== false) {
                 $url_or_path = str_replace('/' . $lang, '', $url_or_path);
             }
         }
