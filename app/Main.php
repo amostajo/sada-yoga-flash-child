@@ -33,9 +33,8 @@ class Main extends Bridge
         // Lang compatibility
         $this->add_filter('asset_base_url', 'ConfigController@asset_url_or_path');
         $this->add_filter('home_path', 'ConfigController@asset_url_or_path');
-        // Ayuco: addition 2020-01-14 10:45 am
+        // WP Login
         $this->add_action('login_head', 'view@login.style');
-        // Ayuco: addition 2020-01-14 10:45 am
         $this->add_filter('login_headerurl', 'AccountController@login_headerurl');
     }
 }
