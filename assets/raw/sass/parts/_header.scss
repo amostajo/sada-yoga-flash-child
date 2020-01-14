@@ -4,5 +4,62 @@ header.site-header
     .header-bottom
     {
         position: relative;
+    }//.header-bottom
+    .site-navigation-wrapper
+    {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }//.site-navigation-wrapper
+    .account-login-profile
+    {
+        img.avatar
+        {
+            width: 44px;
+            height: auto;
+            border-radius: 25px;
+            border: 2px solid #060606;
+            margin: 0;
+            padding: 0;
+        }
     }
+    .lang-picker
+    {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        ul
+        {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li.lang
+            {
+                margin-left: 10px;
+                padding-left: 13px;
+                position: relative;
+                &:before
+                {
+                    content: "/";
+                    position: absolute;
+                    left: 0;
+                }
+                &:first-child
+                {
+                    margin: 0;
+                    padding: 0;
+                    &:before
+                    {
+                        display: none;
+                    }
+                }
+                &.active
+                {
+                    font-weight: bold;
+                    cursor: default;
+                }
+            }
+        }//ul
+    }//.lang-picker
 }//header.site-header
