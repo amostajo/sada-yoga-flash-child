@@ -42,15 +42,13 @@ class AccountController extends Controller
             return;
         }
         $current = pll_current_language('slug');
-        $languages = Cache::remember('languages', 1440, function () {
-            return array_map(function ($slug) {
-                return ['slug' => $slug, 'url' => pll_home_url($url)];
-            }, pll_languages_list());
-        });
-        $languages = array_map(function ($lang) use(&$current) {
-            $lang['active'] = $lang['slug'] === $current;
-            return $lang;
-        }, $languages);
+        $languages = array_map(function ($slug) use(&$current) {
+            return [
+                'slug'      => $slug,
+                'url'       => pll_home_url($slug),
+                'active'    => $slug === $current,
+            ];
+        }, pll_languages_list());
         $this->view->show('nav.lang-picker', ['languages' => $languages]);
     }
     /**
