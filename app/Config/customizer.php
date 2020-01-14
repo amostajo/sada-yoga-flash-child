@@ -22,6 +22,10 @@ return [
             'priority'          => 105, // After menu
             'capability'        => 'edit_theme_options',
         ],
+        'auth' => [
+            'title'             => __( 'Authentication', 'sada-yoga' ),
+            'priority'          => 115,
+        ],
     ],
 
     // Customizer settings
@@ -93,6 +97,34 @@ return [
         'nav_icon_breakpoint' => [
             'default'           => '',
             'sanitize_callback' => 'sanitize_text_field',
+        ],
+        'wp_login_background_color' => [
+            'default'               => '#f1f1f1',
+            'sanitize_callback'     => 'sanitize_hex_color',
+        ],
+        'wp_login_link_color' => [
+            'default'               => '#555d66',
+            'sanitize_callback'     => 'sanitize_hex_color',
+        ],
+        'wp_login_linkhover_color' => [
+            'default'               => '#777f99',
+            'sanitize_callback'     => 'sanitize_hex_color',
+        ],
+        'wp_login_logo' => [
+            'default'               => 0,
+            'sanitize_callback'     => 'absint',
+        ],
+        'wp_login_logo_size' => [
+            'default'               => 84,
+            'sanitize_callback'     => 'absint',
+        ],
+        'wp_login_logo_position' => [
+            'default'               => 'center top',
+            'sanitize_callback'     => 'sanitize_text_field',
+        ],
+        'wp_login_linktext_color' => [
+            'default'               => '#FFFFFF',
+            'sanitize_callback'     => 'sanitize_hex_color',
         ],
     ],
 
@@ -213,6 +245,61 @@ return [
             'section'           => 'nav',
             'label'             => __( 'Floaty icon hide breakpoint', 'sada-yoga' ),
             'description'       => __( 'Resolution breakpoint in which icons will disappear.', 'sada-yoga' ),
+        ],
+        'wp_login_logo' => [
+                'type'              => 'media',
+                'label'             => __( 'WordPress Login Logo', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'mime'              => 'image',
+                'priority'          => 90,
+        ],
+        'wp_login_logo_size' => [
+                'type'              => 'number',
+                'label'             => __( 'WordPress Login Logo Size', 'wpmvc-website' ),
+                'description'       => __( 'In pixels.', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 91,
+                'input_attrs'       => [
+                                        'min' => 50,
+                                        'max' => 320,
+                                    ],
+        ],
+        'wp_login_logo_position' => [
+                'type'              => 'select',
+                'label'             => __( 'WordPress Login Logo Position', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 92,
+                'choices'           => apply_filters( 'wpmvc_wp_logo_positions', [
+                                        'center top'    => __( 'Center Top', 'wpmvc-website' ),
+                                        'center center' => __( 'Center Center', 'wpmvc-website' ),
+                                        'center bottom' => __( 'Center Bottom', 'wpmvc-website' ),
+                                    ] ),
+        ],
+        'wp_login_background_color' => [
+                'type'              => 'color',
+                'label'             => __( 'WordPress Login Background', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 100,
+        ],
+        'wp_login_link_color' => [
+                'type'              => 'color',
+                'label'             => __( 'WordPress Login Links', 'wpmvc-website' ),
+                'description'       => __( 'The small liks located after the white box.', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 101,
+        ],
+        'wp_login_linkhover_color' => [
+                'type'              => 'color',
+                'label'             => __( 'WordPress Login Links (hover)', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 102,
+        ],
+        'wp_login_linktext_color' => [
+                'type'              => 'color',
+                'label'             => __( 'WordPress Login link text', 'wpmvc-website' ),
+                'description'       => __( 'Button text color.', 'wpmvc-website' ),
+                'section'           => 'auth',
+                'priority'          => 103,
         ],
     ],
 

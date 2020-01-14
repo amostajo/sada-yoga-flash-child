@@ -38,21 +38,31 @@ class AccountController extends Controller
      */
     public function lang_picker()
     {
-        if (!function_exists('pll_current_language'))
+        if (!function_exists('pll_current_language')) {
             return;
+        }
         $current = pll_current_language('slug');
-        $languages = Cache::remember('languages',1440, function() {
-            return array_map(function($slug) {
-                return [
-                    'slug'      => $slug,
-                    'url'       => pll_home_url($url),
-                ];
+        $languages = Cache::remember('languages', 1440, function () {
+            return array_map(function ($slug) {
+                return ['slug' => $slug, 'url' => pll_home_url($url)];
             }, pll_languages_list());
         });
-        $languages = array_map(function($lang) use(&$current) {
+        $languages = array_map(function ($lang) use(&$current) {
             $lang['active'] = $lang['slug'] === $current;
             return $lang;
         }, $languages);
-        $this->view->show( 'nav.lang-picker', ['languages' => $languages]);
+        $this->view->show('nav.lang-picker', ['languages' => $languages]);
+    }
+    /**
+     * Returns site url.
+     * @since 1.0.1
+     *
+     * @hook login_headerurl
+     *
+     * @return string
+     */
+    public function login_headerurl()
+    {
+        return home_url('/');
     }
 }
