@@ -36,5 +36,7 @@ class Main extends Bridge
         // WP Login
         $this->add_action('login_head', 'view@login.style');
         $this->add_filter('login_headerurl', 'AccountController@login_headerurl');
+        // Elementor
+        $this->add_action('elementor/widgets/widgets_registered', 'ConfigController@elementor_widgets');
     }
 }
