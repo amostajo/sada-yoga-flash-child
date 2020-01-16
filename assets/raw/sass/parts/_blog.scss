@@ -1,0 +1,29 @@
+/**
+ * blog SASS stylesheet asset.
+ *
+ * @package flash-child
+ * @version 1.0.3
+ */
+
+#primary
+{
+    @media screen and (max-width: $res-laptop-mid)
+    {
+        width: 70% !important;
+    }
+    @media screen and (max-width: $res-mobile)
+    {
+        width: 100% !important;
+    }
+}
+aside#secondary
+{
+    @media screen and (max-width: $res-laptop-mid)
+    {
+        width: 26% !important;
+    }
+    @media screen and (max-width: $res-mobile)
+    {
+        width: 100% !important;
+    }
+}
