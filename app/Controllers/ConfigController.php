@@ -5,13 +5,14 @@ namespace SadaYogaFlash\Controllers;
 use Elementor\Plugin as Elementor;
 use WPMVC\MVC\Controller;
 use SadaYogaFlash\Elementor\EventsWidget;
+use SadaYogaFlash\Elementor\PostsWidget;
 /**
  * Configuration hooks.
  *
  * @author amostajo <https://github.com/amostajo/>
  * @license MIT
  * @package flash-child
- * @version 1.0.2
+ * @version 1.0.3
  */
 class ConfigController extends Controller
 {
@@ -83,6 +84,7 @@ class ConfigController extends Controller
      */
     public function elementor_widgets()
     {
+        Elementor::instance()->widgets_manager->register_widget_type( new PostsWidget() );
         if (function_exists('tribe_get_events'))
             Elementor::instance()->widgets_manager->register_widget_type( new EventsWidget() );
     }

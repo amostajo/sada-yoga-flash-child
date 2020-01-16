@@ -21,6 +21,7 @@
                 <div class="event-data">
                     <div <?php echo $widget->get_render_attribute_string( 'event' ) ?>>
                         <div class="details">
+                            <?php if ( $settings['event_title_link'] === 'yes' ) : ?><a href="<?php echo tribe_get_event_link( $event ) ?>"><?php endif ?>
                             <?php if ( $settings['event_title'] === 'title' ) : ?>
                                 <h4 class="title"><?php echo $event->post_title ?></h4>
                             <?php elseif ( $settings['event_title'] === 'city' ) : ?>
@@ -30,6 +31,7 @@
                             <?php elseif ( $settings['event_title'] === 'country' ) : ?>
                                 <h4 class="title"><?php echo tribe_get_country( $event ) ?></h4>
                             <?php endif ?>
+                            <?php if ( $settings['event_title_link'] === 'yes' ) : ?></a><?php endif ?>
                             <div class="date"><?php echo tribe_get_start_date( $event ) ?></div>
                         </div>
                         <div <?php echo $widget->get_render_attribute_string( 'actions' ) ?>>

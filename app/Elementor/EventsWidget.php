@@ -157,13 +157,21 @@ class EventsWidget extends Widget_Base
                 'default' => 'title',
             ]
         );
+        $this->add_control(
+            'event_title_link',
+            [
+                'label' => __( 'Clickable title' ),
+                'type' => Controls_Manager::SWITCHER,
+                'description' => __( 'Make the title link to the event.', 'flash-child' ),
+                'default' => 'no',
+            ]
+        );
         $this->end_controls_section();
 
         $this->start_controls_section(
             'learnmore_button_section',
             [
                 'label' => __( 'Learn more button', 'flash-child' ),
-                'description' => __( 'This button will display only if there is an external event website attached to the event.', 'flash-child' ),
                 'tab'   => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -172,6 +180,7 @@ class EventsWidget extends Widget_Base
             [
                 'label' => __( 'Label' ),
                 'type' => Controls_Manager::TEXT,
+                'description' => __( 'This button will display only if there is an external event website attached to the event.', 'flash-child' ),
                 'default' => __( 'Details' ),
             ]
         );
