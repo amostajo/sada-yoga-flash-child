@@ -11,10 +11,19 @@ use WPMVC\Bridge;
  * @author amostajo <https://github.com/amostajo/>
  * @license MIT
  * @package flash-child
- * @version 1.0.1
+ * @version 1.0.3
  */
 class Main extends Bridge
 {
+    /**
+     * Current header name
+     * @since 1.0.3
+     * 
+     * @see get_header()
+     * 
+     * @var string|null
+     */
+    public static $header_name = null;
     /**
      * Declaration of public wordpress hooks.
      */
@@ -26,6 +35,9 @@ class Main extends Bridge
         // Footer & copyright
         $this->add_action('flash_copyright_area', 'view@footer.copyright');
         $this->add_filter('sada_yoga_copyright', 'ConfigController@footer_copyright');
+        // Header
+        $this->add_action('get_header', 'ConfigController@get_header');
+        $this->add_filter('sada_yoga_show_title', 'ConfigController@show_title');
         // Account
         $this->add_action('sada_yoga_header_actions', 'view@nav.account-login', 99);
         $this->add_filter('sada_yoga_account_url', 'AccountController@account_url');

@@ -84,8 +84,38 @@ class ConfigController extends Controller
      */
     public function elementor_widgets()
     {
-        Elementor::instance()->widgets_manager->register_widget_type( new PostsWidget() );
-        if (function_exists('tribe_get_events'))
-            Elementor::instance()->widgets_manager->register_widget_type( new EventsWidget() );
+        Elementor::instance()->widgets_manager->register_widget_type(new PostsWidget());
+        if (function_exists('tribe_get_events')) {
+            Elementor::instance()->widgets_manager->register_widget_type(new EventsWidget());
+        }
+    }
+    /**
+     * Sets theme header name.
+     * @since 1.0.3
+     *
+     * @hook get_header
+     */
+    public function get_header($name)
+    {
+        sada_yoga()::$header_name = $name;
+    }
+    /**
+     * Returns flag indicating if title can be displaye dor not.
+     * @since 1.0.3
+     *
+     * @hook sada_yoga_show_title
+     *
+     * @param bool $show
+     * 
+     * @return bool
+     */
+    public function show_title($show)
+    {
+        if ( is_singular( 'tribe_events' )
+            || sada_yoga()::$header_name === 'notitle'
+            || sada_yoga()::$header_name === 'notitle-wide'
+        )
+            return false;
+        return $show;
     }
 }

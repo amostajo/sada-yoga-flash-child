@@ -7,7 +7,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package flash-child
- * @version 1.0.1
+ * @version 1.0.3
  */
 
 ?><!DOCTYPE html>
@@ -198,7 +198,7 @@ do_action( 'flash_before' ); ?>
 
     <?php get_template_part( 'template-parts/header-media' ); ?>
 
-    <?php if( !is_front_page() ) : ?>
+    <?php if( apply_filters( 'sada_yoga_show_title', ! is_front_page() ) ) : ?>
     <nav id="flash-breadcrumbs" class="breadcrumb-trail breadcrumbs">
         <div class="tg-container">
             <?php flash_page_title(); ?>
@@ -214,4 +214,4 @@ do_action( 'flash_before' ); ?>
     do_action( 'flash_before_main' ); ?>
 
     <div id="content" class="site-content">
-        <div class="tg-container">
+        <div <?php if ( sada_yoga()::$header_name !== 'notitle-wide' ) : ?>class="tg-container"<?php endif ?>>
